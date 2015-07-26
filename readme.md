@@ -10,7 +10,7 @@ note: set npm proxy or use cnpm, or you may encounter problem of installing Phan
 
 make sure use run mongod your self, you can make a directory in project root named `data`, since `/data/` has been ignored in .gitignore.
 
-run `gulp`, and you'll open your browser for `http://localhost:3000`, and the express server run on `http://localhost:3002` which is proxyed by a middleware for all routes `/api`, you may visit `http://localhost:3000/api`, it is the same with `http://localhost:3002`.
+run `gulp`, and you'll open your browser for `http://localhost:3000`, and the express server run on `http://localhost:3002` which is proxyed by a middleware for all routes `/api`, you may visit `http://localhost:3000/api`, it is the same with `http://localhost:3002/api`.
 
 `http://localhost:3001` is the browser-sync's backend url, see http://www.browsersync.io/ for more detail.
 
