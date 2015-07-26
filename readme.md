@@ -1,7 +1,7 @@
 # setup
 
 ```
-npm install && bower install
+npm install && cd public && bower install
 ```
 
 note: set npm proxy or use cnpm, or you may encounter problem of installing PhantomJS
