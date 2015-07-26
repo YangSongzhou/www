@@ -1,5 +1,6 @@
 'use strict';
 var gulp = require('gulp');
+var debug = require('gulp-debug');
 var excludeGitignore = require('gulp-exclude-gitignore');
 var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
@@ -14,7 +15,7 @@ var handleErr = function (err) {
 };
 
 gulp.task('static', function () {
-  return gulp.src(['**/*.js', '!public/**/*.js'])
+  return gulp.src(['**/*.js', '!public/**/*.js', '!coverage/**/*.js'])
     .pipe(excludeGitignore())
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
@@ -36,7 +37,9 @@ gulp.task('pre-test', function () {
 gulp.task('test', ['pre-test'], function (cb) {
   var mochaErr;
 
+  console.log(process.cwd());
   gulp.src('test/**/*.js')
+    .pipe(debug({title: 'test', minimal: false}))
     .pipe(plumber())
     .pipe(mocha({reporter: 'spec'}))
     .on('error', function (err) {
