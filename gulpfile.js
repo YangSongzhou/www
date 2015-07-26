@@ -1,4 +1,5 @@
 var path = require('path'),
+  chroot = require('gulp-chroot'),
   namespace = require('gulp-namespace'),
   gulp = require('gulp'),
   requireDir = require('require-dir'),
@@ -8,12 +9,20 @@ var path = require('path'),
   livereload = require('gulp-livereload');
 
 namespace(gulp);
+chroot(gulp);
 
 gulp.task('help', taskListing);
 
-gulp.namespace('front', function() {
-  process.chdir(path.join(__dirname, 'public'));
-  requireDir('./public/gulp');
+gulp.namespace('node', function() {
+  require('./gulp/gulpfile');
+});
+
+gulp.chroot('public', function() {
+  gulp.task('style', ['front:style']);
+  gulp.task('inject', ['front:inject']);
+  gulp.namespace('front', function() {
+    requireDir('./public/gulp');
+  });
 });
 
 gulp.task('develop', function () {
@@ -40,6 +49,4 @@ gulp.task('default', [
 ]);
 
 // shiming
-gulp.task('style', ['front:style']);
-gulp.task('inject', ['front:inject']);
 

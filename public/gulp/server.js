@@ -17,8 +17,16 @@ function browserSyncInit(baseDir, browser) {
   var routes = null;
   if(baseDir === conf.paths.src || (util.isArray(baseDir) && baseDir.indexOf(conf.paths.src) !== -1)) {
     routes = {
-      '/bower_components': 'bower_components'
+      '/bower_components': path.join(conf.paths.base, 'bower_components')
     };
+  }
+
+  if(typeof baseDir === 'string') {
+    baseDir = path.join(conf.paths.base, baseDir);
+  } else if (util.isArray(baseDir)) {
+    baseDir = baseDir.map(function(value) {
+      return path.join(conf.paths.base, value);
+    });
   }
 
   var server = {
@@ -38,7 +46,8 @@ function browserSyncInit(baseDir, browser) {
   browserSync.instance = browserSync.init({
     startPath: '/',
     server: server,
-    browser: browser
+    browser: browser,
+    logLevel: 'debug',
   });
 }
 
