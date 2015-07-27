@@ -1,3 +1,46 @@
-.acme-navbar-text {
-  color: white;
+@nav-background-color: #ffffff;
+
+@nav-text-color: #563d7c;
+
+@font: "Roboto" "微软雅黑";
+
+.nav-hover-text {
+  @nav-background-color-active: #463265;
+  @nav-text-color-hover: #463265;
+}
+
+body {
+  font-family: @font;
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: @font;
+  }
+}
+
+.docs-nav {
+  font-size: 14px;
+  margin-bottom: 0;
+  background-color: @nav-background-color;
+  border-bottom: 0;
+
+  .navbar-brand {
+    font-weight: 900;
+    color: @nav-text-color;
+  }
+
+  .navbar-nav {
+    .active > a {
+      .nav-hover-text;
+    }
+
+    li {
+      a {
+        font-weight: 700;
+        color: @nav-text-color;
+      }
+
+      a:hover {
+        .nav-hover-text;
+      }
+    }
+  }
 }
